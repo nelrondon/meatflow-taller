@@ -1,4 +1,5 @@
 # DEPENDENCIAS EXTERNAS
+import time
 import tkinter as tk
 from tkinter import messagebox
 from PIL import Image, ImageTk
@@ -22,9 +23,9 @@ class MainApp:
         self.num_ventas = tk.IntVar()
 
         # Datos de Ventas
-        self.ventas_efe = tk.StringVar()
-        self.ventas_trans = tk.StringVar()
-        self.ventas_card = tk.StringVar()
+        self.ventas_efe = tk.IntVar()      # Changed from StringVar to IntVar
+        self.ventas_trans = tk.IntVar()    # Changed from StringVar to IntVar
+        self.ventas_card = tk.IntVar()     # Changed from StringVar to IntVar
 
         # Datos de inventario
         self.productos_min_stock = Inventario().verifyMinStock()
@@ -79,7 +80,7 @@ class MainApp:
         ttk.Button(self.botones, command=buyForm.show, width=25, text="Registrar compra").pack(pady=gap)
         ttk.Button(self.botones, command=clientForm.show, width=25, text="Registrar venta").pack(pady=gap)
         ttk.Button(self.botones, command=stockForm.show, width=25, text="Ver inventario").pack(pady=gap)
-        ttk.Button(self.botones, command=None, width=25, text="Generar reporte").pack(pady=gap)
+        ttk.Button(self.botones, command=reportForm.show, width=25, text="Generar reporte").pack(pady=gap)
 
         self.botones.pack()
 
@@ -117,8 +118,8 @@ class MainApp:
 
         # Barra de Estado
         stsbar = tk.Frame(self.display, bd=1, relief=tk.SUNKEN)
-        ttk.Label(stsbar, text="Bienvenido, ").grid(column=0, row=0)
-        ttk.Label(stsbar, textvariable=self.user["name"]).grid(column=1, row=0)
+        ttk.Label(stsbar, text="Bienvenido, ", font=("Inter", 13)).grid(column=0, row=0, padx=5, pady=3)
+        ttk.Label(stsbar, textvariable=self.user["name"], font=("Inter Bold", 13)).grid(column=1, row=0, padx=5, pady=3)
         stsbar.pack(side=tk.BOTTOM, fill=tk.X)
 
     def handle_main_quit(self):
